@@ -54,12 +54,7 @@
             expect(countElement.textContent).toContain("1"); 
         });
 
-        it('should have the initial state', () => {
-            const wrapper = shallow(<ParentTest />);
-            
-        });
-
-        it('should increment the count when the increment function is called', () => {
+        it('should check the initial state and increment the count when the increment function is called', () => {
             const wrapper = shallow(<ParentTest />);
             const initialState = wrapper.find('h3').text();
             expect(initialState).toBe('Count on Parent: 0');
