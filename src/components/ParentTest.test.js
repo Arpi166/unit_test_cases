@@ -1,9 +1,10 @@
     import React from 'react';
-    import {render, screen, fireEvent} from '@testing-library/react';
+    import {render, screen, fireEvent, act} from '@testing-library/react';
     import Enzyme, {shallow} from 'enzyme';
     import ParentTest from './ParentTest'; 
     import Adapter from 'enzyme-adapter-react-16';
     import ChildTest from './ChildTest';
+    import { renderHook } from '@testing-library/react';
 
     Enzyme.configure({adapter: new Adapter()})  
 
@@ -52,4 +53,8 @@
             expect(countElement.textContent).toBe("Count on Parent: 0");
           });
 
+        it('shows initial state',()=>{
+            const wrapper = shallow(<ParentTest/>)
+            expect(wrapper.find('h3').text()).toEqual('Count on Parent: 0')
+        })
     });

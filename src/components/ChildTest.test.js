@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ChildTest from './ChildTest';
-import { render, fireEvent } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 
 Enzyme.configure({adapter: new Adapter()})  
 
@@ -43,7 +43,13 @@ describe('Test cases',()=>{
     it("includes two buttons", () => {
         const wrapper = shallow(<ChildTest></ChildTest> );
         expect(wrapper.find("button").length).toEqual(2);
-    });     
+    });   
+    
+    it("includes two buttons", () => {
+        render(<ChildTest/>);
+        expect(screen.getByRole('button',{name: /Increment/i })).toBeInTheDocument()
+        expect(screen.getByRole('button',{name: /Button/i })).toBeInTheDocument()
+    });   
 });
 
 
