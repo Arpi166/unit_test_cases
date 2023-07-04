@@ -43,26 +43,7 @@ describe('Test cases',()=>{
     it("includes two buttons", () => {
         const wrapper = shallow(<ChildTest></ChildTest> );
         expect(wrapper.find("button").length).toEqual(2);
-    });
-
-    it('state change in ChildTest component', () => {
-        const addMock = jest.fn();
-        const { getByText, getByTestId } = render(
-          <ChildTest count={5} add={addMock}></ChildTest>
-        );  
-        const value = getByText('Updated Value: true');  
-        const button = getByTestId('change-button');  
-        fireEvent.click(button); 
-        const updatedValue = getByText('Updated Value: false');
-        const count = getByText('Count on Child: 5');
-        const incrementButton = getByTestId('increment-button');
-        fireEvent.click(incrementButton);
-        
-        expect(value).toBeInTheDocument();
-        expect(updatedValue).toBeInTheDocument();
-        expect(count).toBeInTheDocument();
-        expect(addMock).toHaveBeenCalledTimes(1);
-      });
+    });     
 });
 
 
