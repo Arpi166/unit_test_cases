@@ -13,8 +13,8 @@ describe('Test cases',()=>{
         expect(buttonElement).toHaveLength(1);
     });
 
-    it('should call increment from props with item on click of increment button', () => {
-        const wrapper=shallow(<ChildTest/>)
+    it('should call increment from props on click of increment button', () => {
+        const wrapper=shallow(<ChildTest></ChildTest>)
         let prevProps = {
             add: jest.fn()
         };
@@ -52,7 +52,7 @@ describe('Test cases',()=>{
     });
 
     it('clicking the button changes the value to "false"', () => {
-        const { getByTestId } = render(<ChildTest count={0} add={() => {}} />);
+        const { getByTestId } = render(<ChildTest count={0} add={() => {}}></ChildTest>);
         const changeButton = getByTestId('change-button');
       
         fireEvent.click(changeButton);

@@ -1,7 +1,7 @@
     import React from 'react';
     import {render, screen, fireEvent} from '@testing-library/react';
     import Enzyme, {shallow} from 'enzyme';
-    import ParentTest from './ParentTest'; 
+    import ParentTest, {fun} from './ParentTest'; 
     import Adapter from 'enzyme-adapter-react-16';
     import ChildTest from './ChildTest';
 
@@ -14,8 +14,8 @@
         }); 
 
         it('test',()=>{
-            let wrapper = shallow(<ParentTest />);
             let simulateOutputAfterClick = 1;
+            const wrapper=shallow(<ParentTest></ParentTest>)
 
             expect(wrapper.find('div.parent').simulate('click').length).toEqual(
                 simulateOutputAfterClick
@@ -23,7 +23,7 @@
         })
 
         test('increment function in ParentTest component', () => {
-            const wrapper= shallow(<ParentTest/>);   
+            const wrapper= shallow(<ParentTest></ParentTest>);   
             const heading = wrapper.find('[data-testid="count"]');
             expect(heading.exists()).toBe(true);
           });
@@ -35,7 +35,7 @@
           });
 
         it('should check the initial state and increment the count when the increment function is called', () => {
-            const wrapper = shallow(<ParentTest />);
+            const wrapper = shallow(<ParentTest></ParentTest>);
             const initialState = wrapper.find('h3').at(0).text();
             expect(initialState).toBe('Count on Parent: 0');
 
@@ -47,7 +47,7 @@
         });
 
         it("should render the initial count correctly", () => {
-            const { getByTestId } = render(<ParentTest />);
+            const { getByTestId } = render(<ParentTest></ParentTest>);
             const countElement = getByTestId("count");
             expect(countElement.textContent).toBe("Count on Parent: 0");
           });
@@ -58,9 +58,18 @@
         })
 
         it('state update with value of input box upon change',()=>{
-            const { getByTestId } = render(<ParentTest />);
+            const { getByTestId } = render(<ParentTest></ParentTest>);
             const inputBox = getByTestId('input-box');
             fireEvent.change(inputBox, { target: { value: 'Hello' } });
             expect(inputBox.value).toBe('Hello');
-        })
+        });
+
+        it('should call setTimeout when focusOnMenu is called', () => {
+            let simulatedOutput = 1;
+    
+            let spy = jest.spyOn(window, 'setTimeout');
+            fun();
+    
+            expect(spy).toHaveBeenCalledTimes(simulatedOutput);
+        });
 });
