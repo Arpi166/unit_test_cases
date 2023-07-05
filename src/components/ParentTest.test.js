@@ -1,10 +1,9 @@
     import React from 'react';
-    import {render, screen, fireEvent, act} from '@testing-library/react';
+    import {render, screen, fireEvent} from '@testing-library/react';
     import Enzyme, {shallow} from 'enzyme';
     import ParentTest from './ParentTest'; 
     import Adapter from 'enzyme-adapter-react-16';
     import ChildTest from './ChildTest';
-    import { renderHook } from '@testing-library/react';
 
     Enzyme.configure({adapter: new Adapter()})  
 
@@ -57,4 +56,11 @@
             const wrapper = shallow(<ParentTest/>)
             expect(wrapper.find('h3').text()).toEqual('Count on Parent: 0')
         })
-    });
+
+        it('state update with value of input box upon change',()=>{
+            const { getByTestId } = render(<ParentTest />);
+            const inputBox = getByTestId('input-box');
+            fireEvent.change(inputBox, { target: { value: 'Hello' } });
+            expect(inputBox.value).toBe('Hello');
+        })
+});

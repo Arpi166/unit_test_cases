@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ChildTest from './ChildTest';
-import { screen, render } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 
 Enzyme.configure({adapter: new Adapter()})  
 
@@ -49,7 +49,18 @@ describe('Test cases',()=>{
         render(<ChildTest/>);
         expect(screen.getByRole('button',{name: /Increment/i })).toBeInTheDocument()
         expect(screen.getByRole('button',{name: /Button/i })).toBeInTheDocument()
-    });   
+    });
+
+    it('clicking the button changes the value to "false"', () => {
+        const { getByTestId } = render(<ChildTest count={0} add={() => {}} />);
+        const changeButton = getByTestId('change-button');
+      
+        fireEvent.click(changeButton);
+      
+        expect(getByTestId('update-value').textContent).toBe('Updated Value: false');
+      });
+      
+
 });
 
 
