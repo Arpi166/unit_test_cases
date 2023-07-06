@@ -3,6 +3,11 @@ import React, {useState} from "react";
 export default function ChildTest(props){
 
     const [value, changeValue]= useState('true');
+    const [name, setName] = useState('')
+
+    React.useEffect(() => {
+        setName('Alice')
+      }, [])
 
     return(
         <div>

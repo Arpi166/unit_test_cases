@@ -59,8 +59,6 @@ describe('Test cases',()=>{
       
         expect(getByTestId('update-value').textContent).toBe('Updated Value: false');
       });
-      
-
 });
 
 
