@@ -4,31 +4,31 @@ import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
 describe("Test the Login Component", () => {
-  test("render the login form submit button on the screen", async () => {
+  it("render the login form submit button on the screen", async () => {
     render(<Login />);
     const buttonList = await screen.findAllByRole("button");
     expect(buttonList).toHaveLength(2);
   });
 
-  test("should be failed on email validation ", () => {
+  it("should be failed on email validation ", () => {
     const testEmail = "arpi.com";
     expect(validateEmail(testEmail)).not.toBe(true);
   });
 
-  test("email input field should accept email ", () => {
+  it("email input field should accept email ", () => {
     render(<Login />);
     const email = screen.getByPlaceholderText("Email");
     userEvent.type(email, "arpi");
     expect(email.value).not.toMatch("arpi.jain@gmail.com");
   });
 
-  test("passport input should have type password ", () => {
+  it("passport input should have type password ", () => {
     render(<Login />);
     const password = screen.getByPlaceholderText("Password");
     expect(password).toHaveAttribute("type", "password");
   });
 
-  test("should display alert if error", () => {
+  it("should display alert if error", () => {
     render(<Login />);
     const email = screen.getByPlaceholderText("Email");
     const password = screen.getByPlaceholderText("Password");
@@ -41,7 +41,7 @@ describe("Test the Login Component", () => {
     expect(error).toBeInTheDocument();
   });
 
-  test("should be able to reset the form ", () => {
+  it("should be able to reset the form ", () => {
     const { getByPlaceholderText, getByTestId } = render(<Login />);
     const resetBtn = getByTestId("reset");
     const emailInputNode = getByPlaceholderText("Email");
@@ -51,7 +51,7 @@ describe("Test the Login Component", () => {
     expect(passwordInputNode.value).toMatch("");
   });
 
-  test("should be able to submit the form", () => {
+  it("should be able to submit the form", () => {
     render(<Login />);
     const email = screen.getByPlaceholderText("Email");
     const password = screen.getByPlaceholderText("Password");

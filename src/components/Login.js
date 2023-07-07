@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.css';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ const Login = () => {
 
   return (
     <>
-      <h2>We will Test the Login Form Component</h2>
+      <h2>Login Form</h2>
       {showUser && (
         <Alert data-testid="user">
           {email}
@@ -65,7 +66,9 @@ const Login = () => {
         <Button
           data-testid="reset"
           onClick={resetForm}
+          style={{ marginLeft: "5px" }}
         >
+        
           Reset
         </Button>
       </Form>
