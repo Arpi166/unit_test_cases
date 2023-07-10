@@ -1,36 +1,39 @@
 import { render, screen, act } from "@testing-library/react";
 import Clock from './Clock';
+import React from 'react';
 
-jest.useFakeTimers();
+beforeEach(() => {
+  jest.useFakeTimers();
+});
 
-describe("Test cases of clock", () => {
-  afterEach(() => {
-    jest.clearAllTimers();
-  });
+afterEach(() => {
+  jest.runOnlyPendingTimers();
+  jest.useRealTimers();
+});
 
-  test("displays the current time on render", () => {
+describe("Clock", () => {
+  test("renders the current time on render", () => {
     render(<Clock />);
-    const timeElement = screen.getByTestId("clock-time");
 
+    const timeElement = screen.getByTestId('clock-time');
+
+    expect(timeElement).toBeInTheDocument();
     expect(timeElement).toHaveTextContent(new Date().toString());
   });
 
   test("updates the time every second", () => {
     render(<Clock />);
-    const timeElement = screen.getByTestId("clock-time");
 
-    expect(timeElement).toHaveTextContent(new Date().toString());
-
-    act(() => {
-      jest.advanceTimersByTime(1000);
-    });
-
-    expect(timeElement).toHaveTextContent(new Date().toString());
+    const timeElement = screen.getByTestId('clock-time');
+    const initialTime = timeElement.textContent;
 
     act(() => {
       jest.advanceTimersByTime(1000);
     });
 
-    expect(timeElement).toHaveTextContent(new Date().toString());
+    const updatedTime = timeElement.textContent;
+
+    expect(updatedTime).not.toBe(initialTime);
+    expect(updatedTime).toContain(new Date().toString());
   });
 });
