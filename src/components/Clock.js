@@ -17,5 +17,5 @@ export default function Clock() {
 
   console.log("Component rendered");
 
-  return <div>{time.toString()}</div>;
+  return <div data-testid='clock-time'>{time.toString()}</div>;
 }

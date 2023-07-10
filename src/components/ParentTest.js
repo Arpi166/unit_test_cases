@@ -7,13 +7,13 @@ export const fun = () => {
     }, 300);
 };
 
-export default function ParentTest(){
+export default function useParentTest(){
 
     const [count, setCount]= useState(0);
     const [guessValue, setGuessValue] = useState('');
 
     let increment=()=>{ 
-        return setCount(count=>count+1)
+         setCount(count=>count+1)
     }
 
     return(

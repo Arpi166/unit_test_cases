@@ -1,6 +1,6 @@
 import Clock from './components/Clock';
 import Login from './components/Login';
-import ParentTest from './components/ParentTest';
+import ParentTest from './components/useParentTest';
 
 function App() {
   return (

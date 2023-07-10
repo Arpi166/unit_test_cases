@@ -4,7 +4,7 @@
     import ParentTest, {fun} from './ParentTest'; 
     import Adapter from 'enzyme-adapter-react-16';
     import ChildTest from './ChildTest';
-
+    
     Enzyme.configure({adapter: new Adapter()})  
 
     describe('Test cases',()=>{
