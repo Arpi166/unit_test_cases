@@ -6,15 +6,21 @@ import { screen, render, fireEvent } from '@testing-library/react';
 
 Enzyme.configure({adapter: new Adapter()})  
 
+let wrapper;
+
+beforeEach(() => {
+    wrapper = shallow(
+        <ChildTest></ChildTest>
+    );
+});
+
 describe('Test cases',()=>{
     it('should render button', ()=>{
-        const wrapper=shallow(<ChildTest></ChildTest>)
         const buttonElement=wrapper.find('#increment');
         expect(buttonElement).toHaveLength(1);
     });
 
     it('should call increment from props on click of increment button', () => {
-        const wrapper=shallow(<ChildTest></ChildTest>)
         let prevProps = {
             add: jest.fn()
         };
@@ -30,8 +36,6 @@ describe('Test cases',()=>{
 
     it('checking state update',()=>{
         jest.spyOn(React, 'useState').mockImplementation((value)=>[value, jest.fn()]);
-
-        const wrapper=shallow(<ChildTest></ChildTest>)
         const button=wrapper.find('#para2');
 
         expect(wrapper.find('#para1').text()).toEqual('Updated Value: true');
@@ -41,7 +45,6 @@ describe('Test cases',()=>{
     });
 
     it("includes two buttons", () => {
-        const wrapper = shallow(<ChildTest></ChildTest> );
         expect(wrapper.find("button").length).toEqual(2);
     });   
     

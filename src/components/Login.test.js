@@ -63,5 +63,5 @@ describe("Test the Login Component", () => {
 
     const user = screen.getByText("arpi@gmail.com");
     expect(user).toBeInTheDocument();
-  });
+});
 });
